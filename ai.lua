@@ -1,9 +1,9 @@
-
 AI = {}
 
 function AI:load()
-    self.width = 20
-    self.height = 100
+    self.img = love.graphics.newImage("assets/2.jpg")
+    self.width = self.img:getWidth()
+    self.height = self.img:getHeight()
     self.x = love.graphics.getWidth() - self.width - 50
     self.y = love.graphics.getHeight() / 2
     self.yVel = 0
@@ -11,7 +11,6 @@ function AI:load()
 
     self.timer = 0
     self.rate = 0.5
- 
 end
 
 function AI:update(dt)
@@ -19,7 +18,7 @@ function AI:update(dt)
     self.timer = self.timer + dt
     if self.timer > self.rate then
         self.timer = 0
-    self:target()
+        self:target()
     end
 end
 
@@ -29,7 +28,7 @@ end
 
 function AI:target()
     if Ball.y + Ball.height < self.y then
-    self.yVel = -self.speed
+        self.yVel = -self.speed
     elseif Ball.y > self.y + self.height then
         self.yVel = self.speed
     else
@@ -38,5 +37,5 @@ function AI:target()
 end
 
 function AI:draw()
-    love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+    love.graphics.draw(self.img, self.x, self.y)
 end
